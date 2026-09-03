@@ -102,7 +102,11 @@ Ansible inventory использует FQDN виртуальных машин в
 .
 ├── .gitignore
 ├── .terraform.lock.hcl
+├── README.md
 ├── alb.tf
+├── ansible
+│   ├── inventory.ini
+│   └── zabbix-agent.yml
 ├── compute.tf
 ├── main.tf
 ├── nat.tf
@@ -110,6 +114,7 @@ Ansible inventory использует FQDN виртуальных машин в
 ├── security-groups.tf
 ├── variables.tf
 └── zabbix-cloud-init.yaml.tftpl
+```
 
 ## Безопасность
 
