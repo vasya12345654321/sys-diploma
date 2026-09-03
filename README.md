@@ -96,6 +96,17 @@ Ansible inventory использует FQDN виртуальных машин в
 
 Подтверждающие скриншоты находятся в каталоге `screenshots`.
 
+## Доступ к инфраструктуре
+
+Для проверки работоспособности развернутой инфраструктуры доступны следующие сервисы:
+
+- **Сайт:** http://51.250.39.172/
+- **Zabbix:** http://93.77.182.196/
+- **Kibana:** http://93.77.185.157:5601/
+
+Сайт доступен через Application Load Balancer.
+Zabbix и Kibana опубликованы для проверки преподавателем.
+
 ## Структура репозитория
 
 ```text
@@ -107,6 +118,15 @@ Ansible inventory использует FQDN виртуальных машин в
 ├── ansible
 │   ├── inventory.ini
 │   └── zabbix-agent.yml
+├── screenshots
+│   ├── 01-network
+│   ├── 05-elasticsearch
+│   ├── 06-kibana
+│   ├── 08-load-balancer
+│   ├── 09-monitoring
+│   ├── 10-final
+│   ├── Backup
+│   └── ansible
 ├── compute.tf
 ├── main.tf
 ├── nat.tf
