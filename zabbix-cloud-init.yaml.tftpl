@@ -1,0 +1,17 @@
+#cloud-config
+datasource:
+  Ec2:
+    strict_id: false
+
+ssh_pwauth: no
+
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    ssh_authorized_keys:
+      - ${ssh_public_key}
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXFdcFmMFCHm8Xy9Kj94IBaVx/GwELaAr9ULh2V5Yk7 ubuntu@bastion
+
+runcmd: []

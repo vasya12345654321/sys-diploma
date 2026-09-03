@@ -1,0 +1,49 @@
+---
+- name: Install and configure Zabbix Agent 2
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Download Zabbix repository package
+      get_url:
+        url: https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest+ubuntu22.04_all.deb
+        dest: /tmp/zabbix-release.deb
+        mode: '0644'
+
+    - name: Install Zabbix repository
+      apt:
+        deb: /tmp/zabbix-release.deb
+
+    - name: Update apt cache
+      apt:
+        update_cache: true
+
+    - name: Install Zabbix Agent 2
+      apt:
+        name: zabbix-agent2
+        state: present
+
+    - name: Configure Zabbix Agent 2 server
+      lineinfile:
+        path: /etc/zabbix/zabbix_agent2.conf
+        regexp: '^Server='
+        line: 'Server=10.10.1.21'
+
+    - name: Configure Zabbix Agent 2 server active
+      lineinfile:
+        path: /etc/zabbix/zabbix_agent2.conf
+        regexp: '^ServerActive='
+        line: 'ServerActive=10.10.1.21'
+
+    - name: Configure hostname
+      lineinfile:
+        path: /etc/zabbix/zabbix_agent2.conf
+        regexp: '^Hostname='
+        line: "Hostname={{ inventory_hostname }}"
+
+    - name: Enable and start Zabbix Agent 2
+      systemd:
+        name: zabbix-agent2
+        enabled: true
+        state: started
